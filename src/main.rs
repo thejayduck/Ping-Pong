@@ -225,16 +225,21 @@ impl EventHandler for MyGame {
 
         self.ball.draw(ctx)?;
 
-        graphics::Text::new(
+        let score_text = graphics::Text::new(
             TextFragment::new(format!(
                 "{0} | {1}",
                 self.player_one.score, self.player_two.score
             ))
             .scale(20.0),
-        )
-        .draw(
+        );
+
+        let score_text_dim = score_text.dimensions(ctx);
+
+        score_text.draw(
             ctx,
-            DrawParam::new().dest([width / 2.0, 0.0]).offset([0.5, 0.0]),
+            DrawParam::new()
+                .dest([width / 2.0, 0.0])
+                .offset(vec2(score_text_dim.w, 0.0) / Vec2::splat(2.0)),
         )?;
 
         if let GameState::Over { player_one_won, .. } = self.game_state {
@@ -254,19 +259,22 @@ impl EventHandler for MyGame {
             )?
             .draw(ctx, DrawParam::new())?;
 
-            graphics::Text::new(
+            let win_text = graphics::Text::new(
                 TextFragment::new(if player_one_won {
                     "Player 1 Won!"
                 } else {
                     "Player 2 Won!"
                 })
                 .scale(20.0),
-            )
-            .draw(
+            );
+
+            let win_text_dim = win_text.dimensions(ctx);
+
+            win_text.draw(
                 ctx,
                 DrawParam::new()
                     .dest([width / 2.0, height / 2.0])
-                    .offset([0.5, 0.5]),
+                    .offset(vec2(win_text_dim.w, win_text_dim.h) / Vec2::splat(2.0)),
             )?;
         }
 
