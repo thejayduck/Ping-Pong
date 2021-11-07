@@ -11,8 +11,8 @@ use crate::{intersects, Direction};
 
 pub struct Player {
     pos: Vec2,
-    vel: f32,
-    target_vel: f32,
+    pub vel: f32,
+    pub target_vel: f32,
     mesh: Arc<Mesh>,
 
     pub score: u32,

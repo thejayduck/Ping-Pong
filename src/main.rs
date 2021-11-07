@@ -209,6 +209,12 @@ impl EventHandler for MyGame {
                     self.game_state = GameState::Play;
                     self.ball.pos = vec2(width / 2.0, height / 2.0);
                     self.ball.vel.x = 150.0;
+
+                    self.player_one.target_vel = 0.0;
+                    self.player_one.vel = 0.0;
+
+                    self.player_two.target_vel = 0.0;
+                    self.player_two.vel = 0.0;
                 }
                 Ok(())
             }
